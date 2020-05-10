@@ -11,7 +11,12 @@ public class BulletFire : MonoBehaviour
     public ParticleSystem muzzleflash;
     public int spreadAmount = 10;
     List<GameObject> bullets;
-    
+
+    public float timeBetweenBullets = 0.15f;        // The time between each shot.
+                       // The distance the gun can fire.
+
+    float timer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +32,11 @@ public class BulletFire : MonoBehaviour
     }
     public void Update()
 	{
-        if (AimingTowardsEnemy.instance.isInRange)
+        timer += Time.deltaTime;
+        if (AimingTowardsEnemy.instance.isInRange && timer >= timeBetweenBullets)
         {
-            Invoke("Fire", fireTime);
+            //Invoke("Fire", fireTime);
+            Fire();
         }
         else
         {
@@ -39,6 +46,7 @@ public class BulletFire : MonoBehaviour
 
     void Fire()
     {
+        timer = 0f;
         for (int i = 0; i < bullets.Count; i++)
         {
             if (!bullets[i].activeInHierarchy)

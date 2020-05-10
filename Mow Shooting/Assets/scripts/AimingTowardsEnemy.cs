@@ -58,8 +58,8 @@ public class AimingTowardsEnemy : MonoBehaviour
             }
             else
             {
-               
-                return;
+                print("not detecting");
+                //return;
             }
         }
 
