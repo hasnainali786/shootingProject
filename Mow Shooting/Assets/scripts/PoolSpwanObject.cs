@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PoolSpwanObject : MonoBehaviour
 {
-    public GameObject enemy;
+    public GameObject[] enemy;
     public int poolAmount = 20;
     List<GameObject> enemies;
     Vector3 center;
-    public int numberOfEnemiesInLevel;
     public int counterOfEnemies;
     public GameObject playerCenter;
     // Start is called before the first frame update
@@ -18,7 +17,8 @@ public class PoolSpwanObject : MonoBehaviour
         enemies = new List<GameObject>();
         for (int i = 0; i < poolAmount; i++)
         {
-            GameObject obj = (GameObject)Instantiate(enemy);
+            int type = Random.Range(0, enemy.Length);
+            GameObject obj = (GameObject)Instantiate(enemy[type]);
             obj.SetActive(false);
             enemies.Add(obj);
         }
@@ -35,11 +35,11 @@ public class PoolSpwanObject : MonoBehaviour
     IEnumerator waitToGenerateEnemy()
     {
         
-        for (int i = 0; i < numberOfEnemiesInLevel; i++)
+        for (int i = 0; i < poolAmount; i++)
         {
             if (!enemies[i].activeInHierarchy)
             {
-                if (counterOfEnemies < numberOfEnemiesInLevel)
+                if (counterOfEnemies < poolAmount)
                 {
                     int a = i * 30;
                     center = playerCenter.transform.position;
@@ -52,7 +52,7 @@ public class PoolSpwanObject : MonoBehaviour
                     // GameObject go = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Cube), newPos, Quaternion.identity);
 
                     counterOfEnemies++;
-                    yield return new WaitForSeconds(Random.Range(2, 5));
+                    yield return new WaitForSeconds(Random.Range(1, 2));
                 }
             }
         }

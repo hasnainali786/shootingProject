@@ -121,7 +121,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: da2ee75ee9b1a4e9997f105e30b66324, type: 2}
 --- !u!1 &50105445
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,9 +336,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa035aff2ac4c4c1f951007695aad5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 7514191334646197665, guid: f301332a8e897491cab482e82364c695, type: 3}
-  poolAmount: 50
-  numberOfEnemiesInLevel: 20
+  enemy:
+  - {fileID: 2505524036852583137, guid: 139beb4f740c44e2db943f7c15797158, type: 3}
+  - {fileID: 1038730993576102908, guid: cb2d9404bdf02467f8305dc57b2439fa, type: 3}
+  poolAmount: 100
   counterOfEnemies: 0
   playerCenter: {fileID: 364195391}
 --- !u!4 &292937358
@@ -739,7 +740,7 @@ Transform:
   - {fileID: 364032537}
   - {fileID: 475775602}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &364032577
 Transform:
@@ -1803,6 +1804,7 @@ MonoBehaviour:
   poolAmount: 40
   muzzleflash: {fileID: 1559426056}
   spreadAmount: 10
+  timeBetweenBullets: 0.15
 --- !u!1 &364195425
 GameObject:
   m_ObjectHideFlags: 0
@@ -44644,7 +44646,7 @@ PrefabInstance:
     - target: {fileID: 7514191334646197669, guid: f301332a8e897491cab482e82364c695,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7514191334646197669, guid: f301332a8e897491cab482e82364c695,
         type: 3}
