@@ -7,6 +7,7 @@ public class BulletFire : MonoBehaviour
     public float fireTime = 0.05f;
     public GameObject bullet;
     public Transform gunBarrel;
+    public AudioSource bulletSound;
     public int poolAmount = 20;
     public ParticleSystem muzzleflash;
     public int spreadAmount = 10;
@@ -36,7 +37,8 @@ public class BulletFire : MonoBehaviour
         if (AimingTowardsEnemy.instance.isInRange && timer >= timeBetweenBullets)
         {
             //Invoke("Fire", fireTime);
-            Fire();
+            //Fire();
+            SpawnBulletSpread();
         }
         else
         {
@@ -56,7 +58,11 @@ public class BulletFire : MonoBehaviour
                 bullets[i].transform.rotation = Quaternion.Euler(rotation);
                 muzzleflash.Play();
                 bullets[i].SetActive(true);
-                return;
+                if (bulletSound)
+                {
+                    bulletSound.Play();
+                }
+                //return;
             }
         }
     }
@@ -64,26 +70,25 @@ public class BulletFire : MonoBehaviour
 
     void SpawnBulletSpread()
     {
-        
-        for (int i = 0; i < bullets.Count; i++)
+        int max = spreadAmount / 2;
+        int min = 0;
+        Vector3 rotation = gunBarrel.rotation.eulerAngles;
+        Vector3 tempRot = rotation;
+        for (int x = min; x < max; x++)
         {
-            int max = spreadAmount / 2;
-            int min = -max;
-            if (!bullets[i].activeInHierarchy)
-            {
-                Vector3 rotation = gunBarrel.rotation.eulerAngles;
-                Vector3 tempRot = rotation;
-                for (int x = min; x < max; x++)
-                {
-                    tempRot.x = (rotation.x + 3 * x) % 360;
+            tempRot.x = (rotation.x + 3 * x) % 360;
 
-                    for (int y = min; y < max; y++)
+            for (int y = min; y < max; y++)
+            {
+                if (!bullets[y].activeInHierarchy)
+                {
+                    tempRot.y = (rotation.y + 3 * y) % 360;
+                    bullets[y].transform.position = gunBarrel.position;
+                    bullets[y].transform.rotation = Quaternion.Euler(tempRot);
+                    bullets[y].SetActive(true);
+                    if (bulletSound)
                     {
-                        tempRot.y = (rotation.y + 3 * y) % 360;
-                        bullets[i].transform.position = gunBarrel.position;
-                        bullets[i].transform.rotation = Quaternion.Euler(tempRot);
-                        muzzleflash.Play();
-                        bullets[i].SetActive(true);
+                        bulletSound.Play();
                     }
                 }
             }

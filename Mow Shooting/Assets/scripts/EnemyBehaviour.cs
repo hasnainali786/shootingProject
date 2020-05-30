@@ -28,7 +28,7 @@ public class EnemyBehaviour : MonoBehaviour
                 agent.isStopped = false;
             }
         }
-        if(deathcount==0)
+        if(deathcount<=0)
         {
             gameObject.SetActive(false);
         }
