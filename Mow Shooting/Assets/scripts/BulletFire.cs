@@ -31,14 +31,13 @@ public class BulletFire : MonoBehaviour
         }
         //InvokeRepeating("Fire", fireTime, fireTime);
     }
-    public void Update()
+    public void FixedUpdate()
 	{
         timer += Time.deltaTime;
         if (AimingTowardsEnemy.instance.isInRange && timer >= timeBetweenBullets)
         {
-            //Invoke("Fire", fireTime);
-            //Fire();
-            SpawnBulletSpread();
+            Fire();
+            //SpawnBulletSpread();
         }
         else
         {

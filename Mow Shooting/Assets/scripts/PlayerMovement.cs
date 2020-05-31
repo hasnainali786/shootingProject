@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
         //Movement
         Vector3 direction = new Vector3(Horizontal, 0f, Vertical).normalized;
-        if(direction.magnitude>=0.1f)
+        if(direction.magnitude>=0.001f)
         {
             if (!AimingTowardsEnemy.instance.isInRange)
             {

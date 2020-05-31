@@ -30,7 +30,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         if(deathcount<=0)
         {
-            gameObject.SetActive(false);
+            StartCoroutine(death());
         }
     }
 
@@ -54,8 +54,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     IEnumerator death()
     {
-        GetComponent<Animation>().Play("death");
+        GetComponent<Animation>().Play("hit");
         hitBool = true;
-        yield return new WaitForSeconds(GetComponent<Animation>()["death"].length);
+        yield return new WaitForSeconds(GetComponent<Animation>()["hit"].length);
+        gameObject.SetActive(false);
     }
 }
